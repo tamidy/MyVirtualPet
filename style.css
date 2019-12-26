@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css?family=Berkshire+Swash');
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+
+body 
+{
+  background: url('https://cdn.indiefolio.com/user/cover/original/427723bd32ead52188b76ba19ed58b56.png');
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Open-Sans", sans-serif;
+  font-size: 20px;
+}
+
+h1, h3, h4
+{
+  font-family: "Berkshire Swash", cursive;
+}
+
+table
+{
+  border: 1px solid black;
+  font-size: 20px;
+}
+
+th, td 
+{
+  padding: 30px;
+  border: 1px solid black;
+}
+
+button
+{
+  background-color: #01E2FF;
+  border: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-size: 18px;
+}
+
+.button 
+{
+  background-color: skyblue;
+  border: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-size: 15px;
+}
+
+p.backstory
+{
+  margin-left: 200px;
+  margin-right: 200px;
+  margin-bottom: 50px;
+  
+  background-color: skyblue;
+  padding: 10px;
+  border: 5px solid grey;
+  border-radius: 15px;
+}
+
+
+
+

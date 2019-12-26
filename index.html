@@ -1,0 +1,202 @@
+<!-- This website demonstrates a state machine, a common technique in AI. -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">    
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <title> My Virtual Pet </title>     
+    <link rel="stylesheet" href="style.css">    
+    <script language="Javascript"> 
+      
+      var images = [
+      "https://www.askideas.com/media/39/Funny-Smiling-Face-Rabbit-Image.jpg",
+      "https://vignette.wikia.nocookie.net/pvx/images/f/f0/RwrrRRrrrr_vihainen_pupu.jpg/revision/latest?cb=20091009153145",
+      "https://i.pinimg.com/originals/be/cf/ac/becfac582fa9e9b45886bcc32e077c2c.jpg",
+      "https://1.bp.blogspot.com/-Xijo_vznwjo/WKCLJHU9a9I/AAAAAAAAAnU/RnO6GCZ4yh81xl05PiCqfnby6Kz-5YURgCLcB/s400/English-Lop-Ears.jpeg",
+      "https://i.pinimg.com/originals/57/09/95/570995b4876016332cfc476f81a4341a.jpg"];
+      
+      var index = 0;
+
+
+      //stimuli: time, feed, pet, cradle, play, ignore
+      //states: happy, hungry, sleepy, bored, sad
+      
+      //values of the states 
+      var happy = 50;
+      var sad = 50;
+      var hungry = 0;
+      var sleepy = 0;
+      var bored = 0;
+      
+      //timeout mechanism that allows my pet to spontaneously transition from one state to another
+      
+      var time;
+      var startTimer;
+
+      function myTimer()
+      {
+        startTimer = 1;
+      
+        displayImage();
+        
+        hunger();
+      }
+            
+      function displayImage()
+      {
+        document.getElementById("imagepic").src = images[index];
+        index++;
+        
+        time = setTimeout(function() { displayImage() } , 10000);
+      }
+      
+    
+      //functions for the states
+      
+      //keeps getting hungrier every 10 seconds 
+      function hunger() 
+      {
+        document.getElementById("hun").value = hungry; 
+        hungry++;
+ 
+        //checking if hunger reaches to zero, and if so, it sends an alert to the user 
+        if(hunger >= 100)
+        {
+          alert("FEED ME!");
+        }
+
+        time = setTimeout(function() { hunger() } , 10000);
+      }
+
+      //if the feed button is pushed, then the hunger counter resets
+      //the clearTimeout mechanism stops the time
+      function resetTime() 
+      {
+        document.getElementById("imagepic").src = "https://kentuckypress.files.wordpress.com/2017/08/3d6ffea2728c4e491cb57fb0ce7f4202-peter-rabbit-bun-bun.jpg";
+        
+        clearTimeout(time);
+
+        happy = 50;
+        sad = 50;
+        hungry = 0;
+        sleepy 0;
+        bored = 0;
+
+        myTimer();
+      }
+
+      function happiness()
+      {
+        happy++;
+        document.getElementById("hap").value = happy;
+
+        sad--;
+        document.getElementById("sa").value = sad;
+
+        //checks if sad reaches to zero, meaning he's very happy
+        if (sad <= 0)
+        {
+          alert("I LOVE YOU!");
+        }
+        
+        document.getElementById("imagepic").src = "https://www.askideas.com/media/39/Funny-Smiling-Face-Rabbit-Image.jpg";
+      }
+
+      function sadness()
+      {
+        sad++;
+        document.getElementById("sa").value = sad;
+        
+        happy--;
+        document.getElementById("hap").value = happy;
+        
+        //checks if happy reaches to zero, meaning he's very sad
+        if (happy <= 0)
+        {
+          alert("PLAY WITH ME!");
+        }
+       
+        document.getElementById("imagepic").src = "https://i.pinimg.com/originals/57/09/95/570995b4876016332cfc476f81a4341a.jpg";
+      }
+   
+      function sleepiness()
+      {
+        sleepy++;
+        document.getElementById("sle").value = sleepy;
+     
+        //checks if sleepiness level reaches 100
+        if (sleepy >= 100)
+        {
+          alert("*Snore*");
+        }
+      
+        document.getElementById("imagepic").src = "https://i.pinimg.com/originals/be/cf/ac/becfac582fa9e9b45886bcc32e077c2c.jpg";
+      }
+ 
+      function boredom()
+      {
+        bored++;
+        document.getElementById("bor").value = bored;
+        
+        //checks if boredom level reaches 100
+        if (bored >= 100)
+        {
+          alert("SO BORED");
+        }
+        
+        document.getElementById("imagepic").src = "https://1.bp.blogspot.com/-Xijo_vznwjo/WKCLJHU9a9I/AAAAAAAAAnU/RnO6GCZ4yh81xl05PiCqfnby6Kz-5YURgCLcB/s400/English-Lop-Ears.jpeg";
+      }
+          
+    </script>
+    
+  </head>
+  
+  
+  <body>
+    <center> 
+    <h1> My Virtual Pet </h1>
+    <h4> Tami Yousafi </h4>
+    <br>       
+    <button type="button" onclick="myTimer()"> Begin! </button> 
+    <br> <br> <br>
+    <input type="button" class="button" value="Feed" onclick="resetTime()"> 
+      
+    <input type="button" class="button" value="Pet" onclick="boredom()">
+    <input type="button" class="button" value="Cradle" onclick="sleepiness()">
+    <input type="button" class="button" value="Play" onclick="happiness()">
+    <input type="button" class="button" value="Ignore" onclick="sadness()">
+    
+    <br> <br> <br> <br> <br> 
+      
+    <img src="https://www.misskatecuttables.com/uploads/shopping_cart/7817/med_bunny-in-egg-boy.png" id="imagepic" width="300" height="300">
+      
+    <br> <br> <br> <br>
+      
+    <table> 
+      <tr> 
+        <th> States&rarr; </th>
+        <th> Happy </th>
+        <th> Sad </th>
+        <th> Hungry </th>
+        <th> Sleepy </th>
+        <th> Bored </th>
+      </tr>
+
+      <tr> 
+        <th> Score&rarr; </th>
+        <td> <textarea id="hap" rows="1" cols="7">50 </textarea> </td>
+        <td> <textarea id="sa" rows="1" cols="7">50 </textarea> </td>
+        <td> <textarea id="hun" rows="1" cols="7">0 </textarea> </td>
+        <td> <textarea id="sle" rows="1" cols="7">0 </textarea> </td>
+        <td> <textarea id="bor" rows="1" cols="7">0 </textarea> </td>
+      </tr>
+    </table>
+      
+    <br> <br> <br> <br> 
+    <h4> Click <a href = "info.html">here</a> for some more information on my buddy!</h4>
+    <br> <br> <br> <br> 
+    
+    </center>
+  </body>
+</html>
